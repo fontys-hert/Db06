@@ -1,0 +1,26 @@
+﻿@model Db06.Mvc.ViewModels.AccountViewModel
+
+<h1>Account for @Model.Name</h1>
+
+@*action=""*@
+<form method="post">
+    <p>
+        <input placeholder="Enter your pin..." type="number" name="pin" />
+    </p>
+    <p>
+        <input type="submit" value="Stuur pin" />
+    </p>
+</form>
+
+@if (Model.IsPinCorrect)
+{
+    <div class="bg-success">
+        Account balance: $@Model.Balance
+    </div>
+}
+else
+{
+    <div class="bg-warning">
+        @Model.ErrorMessage
+    </div>
+}

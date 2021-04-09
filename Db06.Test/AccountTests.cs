@@ -54,7 +54,7 @@ namespace Db06.Test
         // incorrecte pin
 
         [Fact]
-        public void Invalid_pin_when_depositing()
+        public void Shows_a_message_with_an_invalid_pin_when_depositing()
         {
             // arrange
             var account = new Account("Thisoban's account");
@@ -95,6 +95,17 @@ namespace Db06.Test
 
             // assert
             Assert.Equal("Uw bedrag is veilig opgenomen. Nieuwe balans: 50", result);
+        }
+
+        [Fact]
+        public void Gets_the_current_balance_when_pin_is_correct()
+        {
+            var account = new Account("Marc");
+            account.Deposit(12345, 15000);
+
+            var balance = account.GetBalance(12345);
+
+            Assert.Equal(15000, balance);
         }
     }
 }

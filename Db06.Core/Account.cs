@@ -39,7 +39,6 @@ namespace Db06.Core
             return $"Uw bedrag is veilig aangekomen. Nieuwe balans: {_balance}";
         }
 
-        // methodes
         public virtual string Withdraw(int pin, int amount)
         {
             if (pin == _pin)
@@ -49,6 +48,13 @@ namespace Db06.Core
             }
 
             return _incorrectPinMessage;
+        }
+
+        public int GetBalance(int pin)
+        {
+            if (pin != _pin) throw new ArgumentException(_incorrectPinMessage, nameof(pin));
+
+            return _balance;
         }
     }
 }
