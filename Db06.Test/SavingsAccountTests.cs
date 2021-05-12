@@ -1,4 +1,4 @@
-﻿using Db06.Core;
+﻿using Db06.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

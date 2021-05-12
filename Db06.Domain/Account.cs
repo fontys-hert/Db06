@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Db06.Core
+namespace Db06.Domain
 {
     enum AccountType
     {
@@ -17,34 +18,38 @@ namespace Db06.Core
     {
         // fields
         private readonly string _incorrectPinMessage = "Verkeerde PIN";
-        private int _balance;
-        private int _pin; // OO principe: Encapsulation
+        // OO principe: Encapsulation
 
         // properties
-        public string Name { get; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        private int Balance { get; set; }
+        private int Pin { get; set; }
 
         // constructors
+        private Account() { }
+
         public Account(string name, int pin = 12345)
         {
             Name = name;
-            _pin = pin;
+            Pin = pin;
         }
 
         // methodes
         public string Deposit(int pin, int amount)
         {
-            if (pin != _pin) return _incorrectPinMessage;
+            if (pin != Pin) return _incorrectPinMessage;
 
-            _balance += amount;
-            return $"Uw bedrag is veilig aangekomen. Nieuwe balans: {_balance}";
+            Balance += amount;
+            return $"Uw bedrag is veilig aangekomen. Nieuwe balans: {Balance}";
         }
 
         public virtual string Withdraw(int pin, int amount)
         {
-            if (pin == _pin)
+            if (pin == Pin)
             {
-                _balance -= amount;
-                return $"Uw bedrag is veilig opgenomen. Nieuwe balans: {_balance}";
+                Balance -= amount;
+                return $"Uw bedrag is veilig opgenomen. Nieuwe balans: {Balance}";
             }
 
             return _incorrectPinMessage;
@@ -52,9 +57,9 @@ namespace Db06.Core
 
         public int GetBalance(int pin)
         {
-            if (pin != _pin) throw new ArgumentException(_incorrectPinMessage, nameof(pin));
+            if (pin != Pin) throw new ArgumentException(_incorrectPinMessage, nameof(pin));
 
-            return _balance;
+            return Balance;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Db06.Web.Pages.Account
     {
         public void OnGet()
         {
-            var account = new Core.Account("Timo");
+            var account = new Domain.Account("Timo");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Db06.Core;
+﻿using Db06.Core.Services;
+using Db06.DataAccess;
+using Db06.Domain;
 using Db06.Mvc.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,11 +13,13 @@ namespace Db06.Mvc.Controllers
     public class AccountController : Controller
     {
         private readonly Account _account;
+        private readonly Db06Context _context;
 
-        public AccountController()
+        public AccountController(Db06Context context)
         {
             _account = new Account("Timo");
             _account.Deposit(12345, 150);
+            _context = context;
         }
 
         [HttpGet]
@@ -64,5 +68,21 @@ namespace Db06.Mvc.Controllers
 
             return View(accountViewModel);
         }
-    }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(AccountCreateViewModel accountViewModel)
+        {
+            var accountService = new AccountService(_context);
+
+            accountService.CreateNew(new Account(accountViewModel.Name, accountViewModel.Pin));
+
+            return RedirectToAction("Index");
+        }
+    } 
 }

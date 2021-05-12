@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Db06.Core\Db06.Core.csproj" />
+    <ProjectReference Include="..\Db06.DataAccess\Db06.DataAccess.csproj" />
+    <ProjectReference Include="..\Db06.Domain\Db06.Domain.csproj" />
   </ItemGroup>
 
 </Project>

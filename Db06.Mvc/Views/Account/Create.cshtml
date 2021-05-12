@@ -1,0 +1,17 @@
+﻿@model Db06.Mvc.ViewModels.AccountCreateViewModel
+
+<h1>Create new account! 😊</h1>
+
+<form method="post">
+    <p>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </p>
+    <p>
+        <label asp-for="Pin"></label>
+        <input asp-for="Pin" />
+    </p>
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>

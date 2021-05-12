@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Db06.Core
+namespace Db06.Domain
 {
     public class SavingsAccount : Account // OO principe: Inheritance
     {
